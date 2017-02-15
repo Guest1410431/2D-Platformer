@@ -1,0 +1,7 @@
+February 14, 2017
+
+Having trouble getting collision detection working 
+on the second player class. Drawing the player is 
+the easy part, the particles need work, and 
+collision detection is in need of an overhaul as 
+well. 

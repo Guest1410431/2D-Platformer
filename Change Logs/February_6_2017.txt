@@ -1,0 +1,6 @@
+February 6, 2017
+
+Finished up the general set up and layout of the 
+remaining menus. Worked on SpriteSheetManip.java 
+(The program I use to change the text's color) to 
+be more user friendly and easiet to use.

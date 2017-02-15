@@ -1,0 +1,7 @@
+February 12, 2017
+
+Continued working on the new player class. It 
+will have smoother movement, camera tracking, 
+and correct and efficient collision detection. 
+Should be able to eventually apply it to enemies, 
+so less code in the future.

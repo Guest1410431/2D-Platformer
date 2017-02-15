@@ -1,0 +1,8 @@
+February 10, 2017
+
+Working on load sequences. This came up due to the 
+color of the player and bike were not changing to 
+the selected colors due to the everything (including 
+the player) being loaded before the color selection 
+screen can be reached. This may take longer than I 
+want it to.

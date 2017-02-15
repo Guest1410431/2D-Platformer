@@ -1,0 +1,9 @@
+February 9, 2017
+
+Figured out how to implement the player and bike 
+color customization. A decent amount of work and 
+added 16 more colors than I anticipated. Since I 
+am close to finishing the menus, I am strongly 
+considering trashing all my work on the player 
+class in order to start from the beginning on 
+it...Only time will tell...

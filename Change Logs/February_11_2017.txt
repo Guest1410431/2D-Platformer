@@ -1,0 +1,7 @@
+February 11, 2017
+
+Decided to be done with the menus for the moment. 
+Still to be done is initiation cycling; instead 
+of having everything existing at the same time, 
+create one menu, and destroy the other. Started 
+working on a new player class.

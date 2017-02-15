@@ -1,0 +1,5 @@
+February 8, 2017
+
+Working on finishing up the customization menu popups. 
+Getting stuck with how to implement the color 
+coordinated buttons.

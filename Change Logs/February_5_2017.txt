@@ -1,0 +1,6 @@
+February 5, 2017
+
+Finished up the button implementation. Also set 
+up the main menu with the buttons, getting ready 
+to finish up the menus in general, planning on 
+adding minor details as I go.

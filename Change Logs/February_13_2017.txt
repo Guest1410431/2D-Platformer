@@ -1,0 +1,7 @@
+February 13, 2017
+
+Started working on a second player class revolving 
+around the map moving as the player stays in the 
+center of the screen. It should be relatively easy 
+consdering it focuses mainly on the rendering of 
+the player and not the physical space of player.

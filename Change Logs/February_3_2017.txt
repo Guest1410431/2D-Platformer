@@ -1,0 +1,8 @@
+February 3, 2017
+
+Getting menus done means having buttons, buttons 
+need words on them, words have letters, and letters 
+represent images. Weird and confusing constructor 
+chain for it, may ditch Word.java in place of jumping 
+from Button.java -> Letter.java directly, but that is 
+a decision for another day.

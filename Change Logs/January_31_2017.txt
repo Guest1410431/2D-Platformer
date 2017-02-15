@@ -1,0 +1,6 @@
+January 31, 2017
+
+Breifly looked at the spagetti code that is my collision 
+detection. Decided to put it off for another day. Decided 
+to work on menus instead, Got the button class started 
+which will enable a text area for the menus.

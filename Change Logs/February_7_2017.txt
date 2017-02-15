@@ -1,0 +1,9 @@
+February 7, 2017
+
+Converted SpriteSheetManip.java into the Assets.java 
+of the main project. Now able to easily change the 
+text color gradients on the start of the project 
+instead of having to change a file elsewhere and 
+have to manually move it. Began working on the 
+customization menu with a popup system for choosing 
+player colors.

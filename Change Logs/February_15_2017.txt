@@ -1,0 +1,8 @@
+February 15, 2017
+
+Slowly changing the collision detection system 
+for the better. Now there is a heiarchy of blocks 
+that are found in the map class that will contain 
+the information for collision. The implementation 
+has left the screen flashing probably due to too 
+many for loops, which I plan on optimizing.
