@@ -32,9 +32,11 @@ public class Map
 				{
 				case 0x000000 : 
 					world[h][i] = new Block((h*BLOCK_SIZE)+xOffset, (i*BLOCK_SIZE)+yOffset, BlockType.TILE);
+					world[h][i].setSolid(true);
 					break;
 				case 0xFFFFFF : 
 					world[h][i] = new Block((h*BLOCK_SIZE)+xOffset, (i*BLOCK_SIZE)+yOffset, BlockType.AIR);
+					world[h][i].setSolid(false);
 					break;
 				}
 			}
@@ -42,11 +44,14 @@ public class Map
 	}
 	public void render(Graphics g)
 	{
-		for(int i=0; i<map.getHeight(); i++)
+		if(world != null)
 		{
-			for(int h=0; h<map.getWidth(); h++)
+			for(int i=0; i<map.getHeight(); i++)
 			{
-				world[h][i].render(g);
+				for(int h=0; h<map.getWidth(); h++)
+				{
+					world[h][i].render(g);
+				}
 			}
 		}
 	}

@@ -16,11 +16,10 @@ import Entities.Player;
 import Menu.CustomizationMenu;
 import Menu.MainMenu;
 import Menu.SettingsMenu;
-import World.Map;
 
 public class Window extends JPanel
 {	
-	private static String menu_state = "Game";
+	private static String menu_state = "Main";
 	private final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	private final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	
@@ -43,7 +42,7 @@ public class Window extends JPanel
 		frame.setUndecorated(true);
 		frame.setResizable(false);
 
-		player = new Player(frame.getWidth()/2, frame.getHeight()/2);
+		player = new Player((frame.getWidth()/2)-(Player.getPlayerWidth()/2), (frame.getHeight()/2)-(Player.getPlayerHeight()/2));
 		
 		frame.add(this);
 		frame.addKeyListener(new KeyListener()

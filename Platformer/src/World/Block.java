@@ -27,6 +27,10 @@ public class Block
 		this.blockType = blockType;
 
 		block = Assets.getBlock(blockType);
+		
+		solid = false;
+		
+		onScreen = true;
 	}
 
 	public void render(Graphics g)
@@ -45,12 +49,23 @@ public class Block
 				g.setColor(Color.RED);
 			}
 			g.fillRect((int) xPos, (int) yPos, BLOCK_SIZE, BLOCK_SIZE);
-			// g.drawImage(block, (int)xPos, (int)yPos, BLOCK_SIZE, BLOCK_SIZE, null);
 		}
 	}
 	public void setOnScreen(boolean onScreen)
 	{
 		this.onScreen = onScreen;
+	}
+	public void setSolid(boolean solid)
+	{
+		this.solid = solid;
+	}
+	public boolean isSolid()
+	{
+		return solid;
+	}
+	public BlockType getBlockType()
+	{
+		return blockType;
 	}
 	public enum BlockType
 	{

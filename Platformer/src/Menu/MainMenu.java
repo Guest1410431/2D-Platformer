@@ -17,7 +17,7 @@ public class MainMenu
 		this.width = width;
 		this.height = height;
 		
-		buttons.add(new Button(this.width, 150, 190, 200, "abcdef", false, "Main"));
+		buttons.add(new Button(this.width, this.height/7, 190, 200, "abcdef", false, "Main"));
 		buttons.add(new Button(this.width, 510, 50, 100, "Start", true, "Customization"));
 		buttons.add(new Button(this.width, 650, 50, 100, "Settings", true, "Settings"));
 		buttons.add(new Button(this.width, 790, 50, 100, "Quit", true, "Quit"));	

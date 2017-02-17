@@ -1,0 +1,8 @@
+February 17, 2017
+
+I finally igured out what was confusing me about 
+my collision detection code. What was happening 
+was the player was being initiated in a spot that 
+was half the player's width and height below where 
+it was being rendered. Easy fix, easy collision 
+detection.

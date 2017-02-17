@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import Menu.Popup;
 import Utilities.Assets;
 import World.Block;
+import World.Block.BlockType;
 import World.Map;
 
 public class Player
@@ -20,20 +21,20 @@ public class Player
 	private final float MAX_FALL_SPEED = 8f;
 	private final float JUMP_SPEED = 7f;
 	private final float JUMP_DECEL = 0.4f;
-	private final float IDLE_SPEED = 1.2f;	
-	
-	private final int SCREEN_MID_WIDTH = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2);
-	private final int SCREEN_MID_HEIGHT= (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2);
-	private final int RENDER_WINDOW_WIDTH = 60;
-	private final int RENDER_WINDOW_HEIGHT = 35;
-	
+	private final float IDLE_SPEED = 1.2f;
+
+	private final int SCREEN_MID_WIDTH = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2);
+	private final int SCREEN_MID_HEIGHT = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2) + 12;
+	private final int RENDER_WINDOW_WIDTH = 30;
+	private final int RENDER_WINDOW_HEIGHT = 25;
+
 	private int IMG_RATIO = 5;
-	private int playerWidth;
-	private int playerHeight;
-	
+	private static int playerWidth;
+	private static int playerHeight;
+
 	private Map map;
-	private Block[][] world;	
-	
+	private Block[][] world;
+
 	private float xPos;
 	private float yPos;
 	private float speedRight;
@@ -89,12 +90,12 @@ public class Player
 	public void update()
 	{
 		map.update();
-		
-		for(int i=(int) ((xPos/Map.getBlockSize())-(RENDER_WINDOW_WIDTH/2)); i<((xPos/Map.getBlockSize()) + (RENDER_WINDOW_WIDTH/2)); i++)
+
+		for (int i = (int) ((xPos / Map.getBlockSize()) - (RENDER_WINDOW_WIDTH / 2)); i < ((xPos / Map.getBlockSize()) + (RENDER_WINDOW_WIDTH / 2)); i++)
 		{
-			for(int h =(int) ((yPos/Map.getBlockSize())-(RENDER_WINDOW_HEIGHT/2)); h<((yPos/Map.getBlockSize()) + (RENDER_WINDOW_HEIGHT/2)); h++)
+			for (int h = (int) ((yPos / Map.getBlockSize()) - (RENDER_WINDOW_HEIGHT / 2)); h < ((yPos / Map.getBlockSize()) + (RENDER_WINDOW_HEIGHT / 2)); h++)
 			{
-				if(i >= 0 && i <world.length && h >= 0 && h < world[0].length)
+				if (i >= 0 && i < world.length && h >= 0 && h < world[0].length)
 				{
 					world[i][h].setOnScreen(true);
 				}
@@ -390,47 +391,36 @@ public class Player
 
 	public boolean collisionAbove()
 	{
-		if (right)
+		for (int i = (int) (xPos / Map.getBlockSize()) - 2; i < ((xPos + playerWidth) / Map.getBlockSize() + 1); i++)
 		{
-			
-		}
-		if (left)
-		{
-			
-		}
-		else
-		{
-			
+			if (world[i][(int) ((yPos - (playerHeight / 2)) / Map.getBlockSize()) - 2].isSolid())
+			{
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public boolean onGround()
 	{
-		if (right)
+		for (int i = (int) (xPos / Map.getBlockSize()) - 2; i < ((xPos + playerWidth) / Map.getBlockSize() + 1); i++)
 		{
-			
-		}
-		if (left)
-		{
-			
-		}
-		else
-		{
-			
+			if (world[i][(int) ((yPos + (playerHeight)) / Map.getBlockSize()) + 2].isSolid())
+			{
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public boolean collide()
 	{
-		if (right)
+		for (int i = (int) (yPos / Map.getBlockSize()) - 2; i < ((yPos + playerHeight) / Map.getBlockSize() + 1); i++)
 		{
-			
-		}
-		if (left)
-		{
-			
+			if (world[(int) ((right) ? ((xPos+10 + (playerWidth / 2)) / Map.getBlockSize()+2) : ((xPos-10 - (playerWidth / 2)) / Map.getBlockSize())-2)][i].isSolid())
+			{
+				return true;
+			}
 		}
 		return false;
 	}
@@ -439,15 +429,15 @@ public class Player
 	{
 		if (mapMove)
 		{
-			if(map != null)
+			if (map != null)
 			{
 				map.render(g);
-			}		
+			}
 			if (right)
 			{
 				anim_space = 15;
 
-				g.drawImage(anim_right.get(anim_speed), (int) (SCREEN_MID_WIDTH-((playerWidth*IMG_RATIO)/2)), (int) (SCREEN_MID_HEIGHT)-((playerHeight*IMG_RATIO)/2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
+				g.drawImage(anim_right.get(anim_speed), (int) (SCREEN_MID_WIDTH - ((playerWidth * IMG_RATIO) / 2)), (int) (SCREEN_MID_HEIGHT) - ((playerHeight * IMG_RATIO) / 2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
 				anim_frame++;
 
 				if (anim_frame >= anim_space)
@@ -464,7 +454,7 @@ public class Player
 			{
 				anim_space = 15;
 
-				g.drawImage(anim_left.get(anim_speed), (int) (SCREEN_MID_WIDTH-((playerWidth*IMG_RATIO)/2)), (int) (SCREEN_MID_HEIGHT)-((playerHeight*IMG_RATIO)/2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
+				g.drawImage(anim_left.get(anim_speed), (int) (SCREEN_MID_WIDTH - ((playerWidth * IMG_RATIO) / 2)), (int) (SCREEN_MID_HEIGHT) - ((playerHeight * IMG_RATIO) / 2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
 				anim_frame++;
 
 				if (anim_frame >= anim_space)
@@ -483,7 +473,7 @@ public class Player
 
 				if (dir)
 				{
-					g.drawImage(anim_right.get(anim_speed), (int) (SCREEN_MID_WIDTH-((playerWidth*IMG_RATIO)/2)), (int) (SCREEN_MID_HEIGHT)-((playerHeight*IMG_RATIO)/2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
+					g.drawImage(anim_right.get(anim_speed), (int) (SCREEN_MID_WIDTH - ((playerWidth * IMG_RATIO) / 2)), (int) (SCREEN_MID_HEIGHT) - ((playerHeight * IMG_RATIO) / 2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
 					anim_frame++;
 
 					if (anim_speed > anim_right.size() / 2 || anim_speed > anim_left.size() / 2)
@@ -507,7 +497,7 @@ public class Player
 				}
 				else
 				{
-					g.drawImage(anim_left.get(anim_speed), (int) (SCREEN_MID_WIDTH-((playerWidth*IMG_RATIO)/2)), (int) (SCREEN_MID_HEIGHT)-((playerHeight*IMG_RATIO)/2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
+					g.drawImage(anim_left.get(anim_speed), (int) (SCREEN_MID_WIDTH - ((playerWidth * IMG_RATIO) / 2)), (int) (SCREEN_MID_HEIGHT) - ((playerHeight * IMG_RATIO) / 2), playerWidth * IMG_RATIO, playerHeight * IMG_RATIO, null);
 					anim_frame++;
 
 					if (anim_speed > anim_right.size() / 2 || anim_speed > anim_left.size() / 2)
@@ -626,16 +616,29 @@ public class Player
 			p.render(g);
 		}
 	}
+
 	public void setRight(boolean right)
 	{
 		this.right = right;
 	}
+
 	public void setLeft(boolean left)
 	{
 		this.left = left;
 	}
+
 	public void setJump(boolean jump)
 	{
 		this.jump = jump;
+	}
+
+	public static int getPlayerHeight()
+	{
+		return playerHeight;
+	}
+
+	public static int getPlayerWidth()
+	{
+		return playerWidth;
 	}
 }

@@ -1,0 +1,6 @@
+February 16, 2017
+
+I had a eureka moment while working on the player 
+collision about a menu problem I had. Fixed that, and 
+I am still trying to figure out my problems with 
+collision detection. 

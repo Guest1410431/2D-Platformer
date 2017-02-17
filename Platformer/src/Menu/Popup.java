@@ -5,8 +5,6 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
-import Utilities.Assets;
-
 public class Popup
 {
 	private boolean shown;
@@ -41,7 +39,7 @@ public class Popup
 				colorButtons.add(new ColorButton(colors.get((i*6)+h), (int)(WIDTH*.5)-(h-2)*110, (int)(HEIGHT*.52)-(i-1)*110, 90));
 			}
 		}
-		playerColor = Color.RED;
+		playerColor = Color.WHITE;
 		bikeColor = Color.YELLOW;
 	}
 	//This can be done algorithmically, but there is no easy way to sort in the way I want
@@ -72,7 +70,7 @@ public class Popup
 		colors.add(new Color(64, 0, 255));
 		colors.add(new Color(255, 0, 255));
 		colors.add(new Color(255, 0, 128));
-		colors.add(new Color(255, 0, 64));
+		colors.add(new Color(255, 255, 255));
 		
 		return colors;
 	}
@@ -81,12 +79,22 @@ public class Popup
 		if(shown)
 		{
 			button.update();
-		}
-		for(ColorButton cb : colorButtons)
-		{
-			if(cb.contains(mouse_x, mouse_y) || cb.getIndex() >= 50 || cb.getColor() == ((title.equals("PLAYER COLOR") ? playerColor : bikeColor)))
+			
+			for(ColorButton cb : colorButtons)
 			{
-				cb.update();
+				cb.setActive(true);
+				
+				if(cb.contains(mouse_x, mouse_y) || cb.getIndex() >= 50 || cb.getColor() == ((title.equals("PLAYER COLOR") ? playerColor : bikeColor)))
+				{
+					cb.update();
+				}
+			}
+		}
+		else
+		{
+			for(ColorButton cb : colorButtons)
+			{
+				cb.setActive(false);
 			}
 		}
 	}
@@ -96,7 +104,7 @@ public class Popup
 		{
 			if(shown)
 			{
-				if(cb.contains(mouse_x, mouse_y))
+				if(cb.contains(mouse_x, mouse_y) && cb.isActive())
 				{
 					if(title.equals("PLAYER COLOR"))
 					{

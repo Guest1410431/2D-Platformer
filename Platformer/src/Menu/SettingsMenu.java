@@ -17,7 +17,7 @@ public class SettingsMenu
 		this.width = width;
 		this.height = height;
 		
-		buttons.add(new Button(this.width, 150, 190, 200, "Settings", false, "Settings"));
+		buttons.add(new Button(this.width, this.height/7, 190, 200, "Settings", false, "Settings"));
 		buttons.add(new Button(this.width, 440, 50, 100, "Audio", true, "Settings"));
 		buttons.add(new Button(this.width, 570, 50, 100, "Video", true, "Settings"));
 		buttons.add(new Button(this.width, 700, 50, 100, "Controls", true, "Settings"));

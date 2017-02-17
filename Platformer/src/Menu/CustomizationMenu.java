@@ -1,6 +1,5 @@
 package Menu;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ public class CustomizationMenu
 		this.width = width;
 		this.height = height;
 		
-		buttons.add(new Button(this.width, 150, 190, 200, "abcdef", false, "Customization"));
+		buttons.add(new Button(this.width, this.height/7, 190, 200, "abcdef", false, "Customization"));
 		buttons.add(new Button(this.width, 500, 50, 100, "Player Color", true, "Customization"));
 		buttons.add(new Button(this.width, 650, 50, 100, " Bike Color ", true, "Customization"));
 		buttons.add(new Button(this.width, 800, 50, 100, "    Play    ", true, "Game"));

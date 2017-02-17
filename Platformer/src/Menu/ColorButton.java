@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 public class ColorButton
 {	
+	private boolean active;
+	
 	private int index;
 	private int increment;
 	
@@ -24,6 +26,8 @@ public class ColorButton
 		
 		index = 41;
 		increment = 10;
+		
+		active = false;
 	}
 
 	public void update()
@@ -58,8 +62,32 @@ public class ColorButton
 	{
 		return color;
 	}
+	public void setColor(Color color)
+	{
+		this.color = color;
+	}
 	public int getIndex()
 	{
 		return index;
 	}
+	public boolean isActive()
+	{
+		return active;
+	}
+	public void setActive(boolean active)
+	{
+		this.active = active;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

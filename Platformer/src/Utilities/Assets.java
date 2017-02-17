@@ -13,7 +13,7 @@ import World.Block.BlockType;
 
 public class Assets 
 {
-	private static Color col1 = Color.BLUE;
+	private static Color col1 = Color.GREEN;
 	private static Color col2 = new Color(0, 200, 255);
 	
 	private static Color[]colors;
