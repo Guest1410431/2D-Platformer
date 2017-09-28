@@ -2,99 +2,76 @@ package Utilities;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Entities.Player;
-import Menu.CustomizationMenu;
-import Menu.MainMenu;
-import Menu.SettingsMenu;
+import Menu.MenuState;
 
 public class Window extends JPanel
-{	
-	private static String menu_state = "Main";
-	private final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	private final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+{
+	private final int WIDTH = 1200;
+	private final int HEIGHT = 800;
 	
-	private int mouse_x;
-	private int mouse_y;
-			
-	private JFrame frame = new JFrame();
-	
-	private MainMenu mainMenu = new MainMenu(WIDTH, HEIGHT); // "Main"
-	private SettingsMenu settingsMenu = new SettingsMenu(WIDTH, HEIGHT); // "Settings"
-	private CustomizationMenu customizationMenu = new CustomizationMenu(WIDTH, HEIGHT); // "Customization"
-	private Player player;  // "Game"
+	private MenuState menuState;
+	private JFrame frame;
 	
 	public Window()
 	{
-		frame.setSize(WIDTH, HEIGHT);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBackground(Color.WHITE);
-		frame.setUndecorated(true);
-		frame.setResizable(false);
-
-		player = new Player((frame.getWidth()/2)-(Player.getPlayerWidth()/2), (frame.getHeight()/2)-(Player.getPlayerHeight()/2));
+		// Load up Menu Assets
 		
-		frame.add(this);
-		frame.addKeyListener(new KeyListener()
-		{
-			public void keyTyped(KeyEvent e)
-			{
-				
-			}
-			public void keyReleased(KeyEvent e)
-			{
-				if(e.getKeyCode() == KeyEvent.VK_D)
-				{
-					player.setRight(false);
-				}
-				if(e.getKeyCode() == KeyEvent.VK_A)
-				{
-					player.setLeft(false);
-				}
-				if(e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_W)
-				{
-					player.setJump(false);
-				}
-			}
+		// Load Menu
+		initMenu();
+		// If(you.areWorkingOnGameplay()) {
+		// 		Load up Gameplay Assets
+		// 		Load Game
+		// }
+		// Load the Frame last
+		initFrame();
+	}
+	private void initMenu()
+	{
+		menuState = new MenuState();
+	}
+	private void initFrame()
+	{
+		setBackground(Color.WHITE);
 
+		frame = new JFrame();
+
+		frame.setTitle("Set'lers of Nahtan");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(this);
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+
+		frame.addKeyListener(new KeyListener() // Key Listener
+		{
 			public void keyPressed(KeyEvent e)
 			{
-				if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+				int key = e.getKeyCode();
+
+				if(key == KeyEvent.VK_U)
 				{
-					System.exit(0);
+					menuState.update();
 				}
-				if(e.getKeyCode() == KeyEvent.VK_D)
+				if (key == KeyEvent.VK_ESCAPE) // key bind to close the application
 				{
-					player.setRight(true);
-				}
-				if(e.getKeyCode() == KeyEvent.VK_A)
-				{
-					player.setLeft(true);
-				}
-				if(e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_W)
-				{
-					player.setJump(true);
+					System.exit(1);
 				}
 			}
-		});
-		frame.addMouseMotionListener(new MouseMotionListener()
-		{
-			public void mouseMoved(MouseEvent e)
+
+			public void keyReleased(KeyEvent e)
 			{
-				mouse_x = e.getX();
-				mouse_y = e.getY();
 			}
-			public void mouseDragged(MouseEvent e)
+
+			public void keyTyped(KeyEvent e)
 			{
 			}
 		});
@@ -106,22 +83,7 @@ public class Window extends JPanel
 			}
 			public void mousePressed(MouseEvent e)
 			{
-				if(menu_state == "Main")
-				{
-					mainMenu.click(mouse_x, mouse_y);
-				}
-				else if(menu_state == "Settings")
-				{
-					settingsMenu.click(mouse_x, mouse_y);
-				}
-				else if(menu_state == "Customization")
-				{
-					customizationMenu.click(mouse_x, mouse_y);
-				}
-				else if(menu_state == "Game")
-				{
-					
-				}
+				
 			}
 			public void mouseExited(MouseEvent e)
 			{
@@ -133,77 +95,27 @@ public class Window extends JPanel
 			}
 			public void mouseClicked(MouseEvent e)
 			{
-				
+				menuState.checkMouseClick(e.getX(), e.getY());
+				if(menuState.getMenuState() == -1)
+				{
+					System.exit(0);
+				}
 			}
 		});
-		frame.setVisible(true);
 	}
-
+	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-
-		if(menu_state == "Main")
-		{
-			mainMenu.render(g);
-		}
-		else if(menu_state == "Settings")
-		{
-			settingsMenu.render(g);
-		}
-		else if(menu_state == "Customization")
-		{
-			customizationMenu.render(g);
-		}
-		else if(menu_state == "Game")
-		{
-			player.render(g);
-		}
-		repaint();
+		// Render Here
+		menuState.render(g);
 	}
 
 	public void update()
 	{
-		if(menu_state == "Main")
-		{
-			mainMenu.update(mouse_x, mouse_y);
-		}
-		else if(menu_state == "Settings")
-		{
-			settingsMenu.update(mouse_x, mouse_y);
-		}
-		else if(menu_state == "Customization")
-		{
-			customizationMenu.update(mouse_x, mouse_y);
-		}
-		else if(menu_state == "Game")
-		{
-			player.update();
-		}
-		else if(menu_state == "Quit")
-		{
-			System.exit(0);
-		}
-	}
-	public static void setMenuState(String menu)
-	{
-		menu_state = menu;
+		// Update Here
+
+		// Repaint the Window
+		repaint();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
